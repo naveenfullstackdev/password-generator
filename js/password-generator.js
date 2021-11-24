@@ -21,7 +21,6 @@ const numberCharCodes = arrayFromLowToHigh(48, 57);
 const symbolCharCodes = arrayFromLowToHigh(33, 47)
   .concat(arrayFromLowToHigh(58, 64))
   .concat(arrayFromLowToHigh(91, 96))
-  .concat(arrayFromLowToHigh(91, 96))
   .concat(arrayFromLowToHigh(123, 126));
 
 characterAmountNumber.addEventListener("input", syncCharacterAmount);
@@ -50,9 +49,9 @@ function generatePassword(
   includeSymbols
 ) {
   let charCodes = lowercaseCharCodes;
-  if (includeUppercase) (charCodes = charCodes), concat(uppercaseCharCodes);
-  if (includeNumbers) (charCodes = charCodes), concat(numberCharCodes);
-  if (includeSymbols) (charCodes = charCodes), concat(symbolCharCodes);
+  if (includeUppercase) charCodes = charCodes.concat(uppercaseCharCodes);
+  if (includeSymbols) charCodes = charCodes.concat(symbolCharCodes);
+  if (includeNumbers) charCodes = charCodes.concat(numberCharCodes);
   const passwordCharacters = [];
   for (let i = 0; i < characterAmount; i++) {
     const characterCode =
@@ -65,8 +64,8 @@ function generatePassword(
 function arrayFromLowToHigh(low, high) {
   const array = [];
 
-  for (let i = low; low <= high; low++) {
-    array.push(high);
+  for (let i = low; i <= high; i++) {
+    array.push(i);
   }
 
   return array;
